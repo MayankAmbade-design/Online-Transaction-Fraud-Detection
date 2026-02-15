@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Fraud Detection</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #0f172a;
+    color: white;
+    overflow-x: hidden;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.container {
+    max-width: 750px;
+    margin: 60px auto;
+    padding: 40px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+h1 {
+    text-align: center;
+    font-weight: 600;
+}
+
+.subtitle {
+    text-align: center;
+    opacity: 0.7;
+    margin-bottom: 30px;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 14px;
+    resize: none;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    border-radius: 12px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.predict-btn {
+    background: linear-gradient(90deg,#00c6ff,#0072ff);
+    color: white;
+}
+
+.predict-btn:hover {
+    transform: scale(1.05);
+}
+
+.autofill-btn {
+    background: #334155;
+    color: white;
+}
+
+.result-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.gauge {
+    width: 160px;
+    height: 160px;
+    margin: 20px auto;
+    border-radius: 50%;
+    background: conic-gradient(#00ffae 0deg, #1e293b 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.description {
+    margin-top: 40px;
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.85;
+}
+
+.section-title {
+    margin-top: 30px;
+    font-weight: 600;
+    font-size: 16px;
+}
+</style>
+
+<script>
+function autoFill() {
+    document.getElementById("features").value =
+    "0.0,-1.359807,-0.072781,2.536346,1.378155,-0.338321,0.462388,0.239599,0.098698,0.363787,0.090794,-0.551600,-0.617801,-0.991390,-0.311169,1.468177,-0.470401,0.207971,0.025791,0.403993,0.251412,-0.018307,0.277838,-0.110474,0.066928,0.128539,-0.189115,0.133558,-0.021053,149.62";
+}
+
+function animateGauge(prob) {
+    let gauge = document.getElementById("gauge");
+    let degrees = prob * 360;
+    gauge.style.background = `conic-gradient(${prob > 0.5 ? "#ff4d4d" : "#00ffae"} ${degrees}deg, #1e293b ${degrees}deg)`;
+    gauge.innerText = Math.round(prob * 100) + "%";
+}
+</script>
+
+</head>
+
+<body>
+
+<div id="particles-js"></div>
+
+<div class="container">
+
+<h1> ML Fraud Detection System</h1>
+<div class="subtitle">Real-Time Transaction Risk Analysis</div>
+
+<form method="POST" action="/predict">
+
+<textarea id="features" name="features"
+placeholder="Enter 30 transaction features (comma-separated)"></textarea>
+
+<button type="button" class="autofill-btn" onclick="autoFill()">Auto Fill Sample</button>
+<button type="submit" class="predict-btn">Analyze Transaction</button>
+
+</form>
+
+{% if result %}
+<div class="result-section">
+    <h2>{{ result }}</h2>
+
+    {% set prob = result.split("Probability: ")[1].replace(")", "") | float %}
+    <div class="gauge" id="gauge">0%</div>
+
+    <script>
+        animateGauge({{ prob }});
+    </script>
+</div>
+{% endif %}
+
+<div class="description">
+
+<div class="section-title">How It Works</div>
+This system uses a Machine Learning model trained on historical transaction data.
+It analyzes 30 transaction features including time, amount, and PCA-transformed behavior indicators.
+The model compares new transactions with learned fraud patterns.
+
+<div class="section-title">Why It Is Genuine or Fraud</div>
+If the transaction behavior matches normal spending patterns (regular amount, expected timing, typical behavior),
+it is classified as Genuine.
+If the transaction significantly deviates from learned fraud indicators,
+it is classified as Fraudulent with a higher probability score.
+
+<div class="section-title">Example</div>
+If a user normally spends ₹1,000 locally during daytime,
+but suddenly a ₹50,000 international transaction happens at 3 AM,
+the system detects abnormal behavior and increases fraud probability.
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 60 },
+    size: { value: 3 },
+    move: { speed: 1 },
+    line_linked: { enable: true },
+    color: { value: "#00c6ff" }
+  }
+});
+</script>
+
+</body>
+</html>
