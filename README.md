@@ -1,10 +1,10 @@
-# 💳 Online Transaction Fraud Detection System
+#  Online Transaction Fraud Detection System
 
 A Machine Learning based Web Application that detects fraudulent credit card transactions using a trained Random Forest model.
 
 ---
 
-## 🚀 Project Overview
+##  Project Overview
 
 This project uses Machine Learning to classify online credit card transactions as:
 
@@ -21,7 +21,7 @@ The system is built using:
 
 ---
 
-## 📊 Dataset
+##  Dataset
 
 The dataset contains:
 
@@ -34,7 +34,7 @@ The V1–V28 features are anonymized PCA components to protect user identity.
 
 ---
 
-## 🧠 Machine Learning Model
+##  Machine Learning Model
 
 Model Used:
 - Random Forest Classifier
@@ -50,7 +50,7 @@ Steps:
 
 ---
 
-## 🌐 How It Works
+##  How It Works
 
 1. User enters 30 transaction values.
 2. Flask receives input.
@@ -62,7 +62,7 @@ Steps:
 
 ---
 
-## ⚙️ Technologies Used
+##  Technologies Used
 
 - Python
 - NumPy
@@ -75,7 +75,7 @@ Steps:
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 Online-Transaction-Fraud-Detection/
@@ -91,7 +91,7 @@ Online-Transaction-Fraud-Detection/
 
 ---
 
-## 🎯 Future Improvements
+##  Future Improvements
 
 - Real-time transaction monitoring
 - Database integration
@@ -101,7 +101,7 @@ Online-Transaction-Fraud-Detection/
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 Mayank Ambade  
 Machine Learning & Web Development Project
